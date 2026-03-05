@@ -1,0 +1,5 @@
+server:
+  extraScrapeConfigs:
+    - job_name: "metrics-demo"
+      static_configs:
+        - targets: ["metrics-demo.default.svc.cluster.local:9102"]

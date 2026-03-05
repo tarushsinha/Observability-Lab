@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-demo
+  labels:
+    app: metrics-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-demo
+  template:
+    metadata:
+      labels:
+        app: metrics-demo
+    spec:
+      containers:
+      - name: statsd-exporter
+        image: prom/statsd-exporter:v0.26.1
+        ports:
+        - name: http
+          containerPort: 9102
+        - name: statsd
+          containerPort: 9125
+          protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metrics-demo
+  labels:
+    app: metrics-demo
+spec:
+  selector:
+    app: metrics-demo
+  ports:
+  - name: http
+    port: 9102
+    targetPort: 9102
+  - name: statsd
+    port: 9125
+    targetPort: 9125
+    protocol: UDP

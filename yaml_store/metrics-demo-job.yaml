@@ -1,0 +1,5 @@
+- job_name: metrics-demo
+  scrape_interval: 5s
+  static_configs:
+    - targets:
+        - metrics-demo.default.svc.cluster.local:9102

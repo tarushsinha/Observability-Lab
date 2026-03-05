@@ -1,0 +1,4 @@
+server:
+  additionalScrapeConfigsSecret:
+    name: prom-additional-scrape
+    key: additional-scrape-configs.yaml
